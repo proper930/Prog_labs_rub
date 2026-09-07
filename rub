@@ -1,0 +1,22 @@
+#define _USE_MATH_DEFINES 
+#include <iostream>
+#include <cmath>
+
+int main()
+{
+	float r = 5;
+	float l = 2 * M_PI * r;
+	float plosh = M_PI * r * r;
+	float plosfer = 4 * plosh;
+	float v = 4 / 3. * plosh * r;
+	printf(" l = %f\n", l);
+	printf(" plosh = %f\n", plosh);
+	printf("plosfer = %f\n", plosfer);
+	printf(" v = %f\n", v);
+	return 0;
+
+	/*int k = 4000;
+	int h = k / 3600;// находим часы
+	int m = (k / 60 ) % 60; //% 60 убирает минуты, которые уже ушли в целые часы
+	int s = k % 60;// % находит секунды, которые не поместились в полные минуты
+	printf("%d  %d  %d", h,m,s);//%d — вывод целого числа в десятичной системе*/
