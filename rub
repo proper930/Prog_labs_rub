@@ -32,3 +32,17 @@ printf(" plosh = %f\n", plosh);
 printf("plosfer = %f\n", plosfer);
 printf(" v = %f\n", v);
 return 0;*\
+
+
+
+#include <iostream>
+#include <cmath>
+
+int main()
+{
+	//double zerna = pow(2, 64) - 1;
+	double zerna = ~0ULL;
+	unsigned long long god = ceil(zerna / 7e14);
+	printf("god = %llu\n", god);
+	return 0;
+}
