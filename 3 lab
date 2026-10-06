@@ -49,3 +49,62 @@ int main() {
 
     return 0;
 }
+
+
+
+
+12 задача 
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <math.h>
+#include <locale.h>
+
+int main()
+{
+    setlocale(LC_ALL, "RU");
+
+    int N = 0;
+    double L1 = 0.0, L2 = 0.0;
+    int k = 0;
+
+    
+    while (1) {
+        printf("Введите количество отрезков (целое число больше 0): ");
+      
+        if (scanf("%d", &N) == 1 && N > 0) {
+            break;
+        }
+        printf("Ошибка! Вы ввели неверное значение. Попробуйте еще раз.\n");
+        while (getchar() != '\n'); 
+    }
+
+    while (1) {
+        printf("Введите L1 и L2 (L1 должно быть меньше L2): ");
+        if (scanf("%lf %lf", &L1, &L2) == 2 && L1 < L2) {
+            break;
+        }
+        printf("Ошибка! Проверьте, что введены два числа и L1 < L2.\n");
+        while (getchar() != '\n');
+    }
+
+    for (int i = 1; i <= N; i++) {
+        double x1 = 0.0, y1 = 0.0, x2 = 0.0, y2 = 0.0;
+
+        while (1) {
+            printf("Введите координаты концов %d отрезка (x1 y1 x2 y2): ", i);
+            if (scanf("%lf %lf %lf %lf", &x1, &y1, &x2, &y2) == 4) {
+                break;
+            }
+            printf("Ошибка! Введите 4 дробных или целых числа через пробел.\n");
+            while (getchar() != '\n');
+        }
+
+        double rast = sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+
+        if (rast > L1 && rast < L2) {
+            k = k + 1; 
+        }
+    }
+    printf("\nКоличество подходящих отрезков: %d\n", k);
+    return 0;
+}
