@@ -102,12 +102,12 @@ int main()
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <locale.h>
-int main(){
+int main() {
 	setlocale(LC_ALL, "RUS");
 	int N = 0;
 	int k = 0;
 	printf("Ввудите количесто вершин N-угольника(не меньеш 3)");
-	while (scanf("%d", &N)!=1 || N < 3) {
+	while (scanf("%d", &N) != 1 || N < 3) {
 		printf("Ошибка! Введите целое число больше или равное 3: ");
 		while (getchar() != '\n');
 	}
@@ -120,28 +120,29 @@ int main(){
 	}
 	xn = xp;
 	yn = yp;
-	for (int i = 2;i <= N;i++) {
+	for (int i = 2; i <= N; i++) {
 		printf("Введите координаты %d-й вершины (x y): ", i);
 		while (scanf("%lf %lf", &x, &y) != 2) {
 			printf("Ошибка! Введите 2 числа через пробел: ");
 			while (getchar() != '\n');
 
 		}
-		if (xp * x <= 0) {
-			k = k + 1;
+		if ((xp * x < 0) || (xp == 0 && x != 0)) {
+			k++;
 
 		}
 		xp = x;
 		yp = y;
 	}
-	if (x * xn <= 0) {
-	k = k + 1;
+	if ((xp * xn < 0) || (xp == 0 && xn != 0)) {
+		k++;
 	}
+
 
 	printf("\nКоличество ребер, пересекающих ось ординат: %d\n", k);
 	return 0;
-	
-	
+
+
 
 
 
