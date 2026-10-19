@@ -3,35 +3,43 @@
 #include <stdlib.h>
 #include <locale.h>
 
+#define MAX_SIZE 1000
+
 int main() {
     setlocale(LC_ALL, "RUS");
-    int arr[1000];
+
+    int input_size;
+    int arr[MAX_SIZE];
     int ts;
-    int cs = 0; 
+    int cs = 0;
     int c = 0;
 
-    printf("Сгенерировать массив чисел \n");
-    for (int i = 0; i < 1000; i++) {
+    printf("Введите размер массива (сколько чисел сгенерировать): ");
+    scanf("%d", &input_size);
+
+    const int SIZE = input_size;
+
+    printf("\nСгенерированный массив чисел:\n");
+    for (int i = 0; i < SIZE; i++) {
         arr[i] = rand() % 50 + 1;
         printf("%d ", arr[i]);
     }
     printf("\n\n");
 
-    printf("Введите заданное значение суммы ");
+    printf("Введите заданное значение суммы: ");
     scanf("%d", &ts);
 
-   
-    for (int i = 0; i < 1000 && cs <= ts; i++) {
+    for (int i = 0; i < SIZE && cs <= ts; i++) {
         cs = cs + arr[i];
-        c++; 
+        c++;
     }
 
-    
     if (cs > ts) {
         printf("\nНужно сложить элементов: %d\n", c);
         printf("Полученная сумма: %d\n", cs);
     }
     else {
-        printf("\nДаже всех 1000 элементов не хватило, чтобы превысить %d\n", ts);
+        printf("\nДаже всех %d элементов не хватило, чтобы превысить %d\n", SIZE, ts);
     }
 }
+
