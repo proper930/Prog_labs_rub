@@ -1,0 +1,37 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+int main() {
+    setlocale(LC_ALL, "RUS");
+    int arr[1000];
+    int ts;
+    int cs = 0; 
+    int c = 0;
+
+    printf("Сгенерировать массив чисел \n");
+    for (int i = 0; i < 1000; i++) {
+        arr[i] = rand() % 50 + 1;
+        printf("%d ", arr[i]);
+    }
+    printf("\n\n");
+
+    printf("Введите заданное значение суммы ");
+    scanf("%d", &ts);
+
+   
+    for (int i = 0; i < 1000 && cs <= ts; i++) {
+        cs = cs + arr[i];
+        c++; 
+    }
+
+    
+    if (cs > ts) {
+        printf("\nНужно сложить элементов: %d\n", c);
+        printf("Полученная сумма: %d\n", cs);
+    }
+    else {
+        printf("\nДаже всех 1000 элементов не хватило, чтобы превысить %d\n", ts);
+    }
+}
