@@ -113,3 +113,118 @@ return 0;
 }
 
 
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+int main() {
+    setlocale(LC_ALL, "RUS");
+
+    int input_size = 0;
+    int valid_size = 0;
+
+    while (valid_size == 0) {
+        printf("Введите размер массива: ");
+        if (scanf("%d", &input_size) != 1) {
+            printf("Ошибка ввода. Пожалуйста, введите целое число.\n");
+            scanf("%*s"); 
+        }
+        else {
+            
+            if (input_size <= 0 || input_size > 10000) {
+                printf("Ошибка: размер должен быть от 1 до 10000 (вы ввели %d).\n", input_size);
+            }
+            else {
+                valid_size = 1;
+            }
+        }
+    }
+
+    const int SIZE = input_size;
+
+    int arr[10000];
+
+    printf("\nСгенерированный массив чисел:\n");
+    for (int i = 0; i < SIZE; i++) {
+        arr[i] = rand() % 50 + 1;
+        printf("%d ", arr[i]);
+    }
+    printf("\n\n");
+
+    int target_sum = 0;
+    int valid_sum = 0;
+
+   
+    while (valid_sum == 0) {
+        printf("Введите заданное значение суммы (S > 0): ");
+        if (scanf("%d", &target_sum) != 1) {
+            printf("Ошибка ввода. Пожалуйста, введите целое число.\n");
+            scanf("%*s");
+        }
+        else {
+            if (target_sum <= 0) {
+                printf("Ошибка ввода: значение должно быть больше 0 (вы ввели %d).\n", target_sum);
+            }
+            else {
+                valid_sum = 1;
+            }
+        }
+    }
+
+    int sum = 0;
+    int count = 0;
+
+    // --- Вариант 1: Цикл while ---
+    sum = 0;
+    count = 0;
+    while (count < SIZE && sum <= target_sum) {
+        sum += arr[count];
+        count++;
+    }
+
+    printf("\n--- Цикл while ---\n");
+    if (sum > target_sum) {
+        printf("Минимальное количество элементов: %d\n", count);
+        printf("Достигнутая сумма: %d\n", sum);
+    }
+    else {
+        printf("Даже всех %d элементов не хватило, чтобы превысить %d. Максимальная сумма: %d\n", SIZE, target_sum, sum);
+    }
+
+    // --- Вариант 2: Цикл do-while ---
+    sum = 0;
+    count = 0;
+    do {
+        sum += arr[count];
+        count++;
+    } while (count < SIZE && sum <= target_sum);
+
+    printf("\n--- Цикл do-while ---\n");
+    if (sum > target_sum) {
+        printf("Минимальное количество элементов: %d\n", count);
+        printf("Достигнутая сумма: %d\n", sum);
+    }
+    else {
+        printf("Даже всех %d элементов не хватило, чтобы превысить %d.\n", SIZE, target_sum);
+    }
+
+    // --- Вариант 3: Цикл for ---
+    sum = 0;
+    count = 0;
+    for (; count < SIZE && sum <= target_sum; ) {
+        sum += arr[count];
+        count++;
+    }
+
+    printf("\n--- Цикл for ---\n");
+    if (sum > target_sum) {
+        printf("Минимальное количество элементов: %d\n", count);
+        printf("Достигнутая сумма: %d\n", sum);
+    }
+    else {
+        printf("Даже всех %d элементов не хватило, чтобы превысить %d.\n", SIZE, target_sum);
+    }
+
+    return 0;
+}
