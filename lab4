@@ -271,4 +271,80 @@ int main(){
     
     return 0;
 }
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <locale.h>
+#include <stdlib.h>
+
+int main() {
+    setlocale(LC_ALL, "RUS");
+
+    const int maxSize = 1000;
+    int array[maxSize];
+    int size;
+
+    do {
+        printf("Введите размер массива (от 1 до %d): ", maxSize);
+        if (scanf("%d", &size) != 1) {
+            while (getchar() != '\n');
+            size = -1;
+        }
+        if (size <= 0 || size > maxSize) {
+            printf("Неверный ввод! Попробуйте еще раз.\n\n");
+        }
+    } while (size <= 0 || size > maxSize);
+
+    for (int idx = 0; idx < size; idx++) {
+        array[idx] = rand() % 50 + 1;
+    }
+
+    printf("\nСгенерированный массив:\n");
+    for (int idx = 0; idx < size; idx++) {
+        printf("%d ", array[idx]);
+    }
+    printf("\n\n");
+
+    int limit;
+    printf("Введите значение суммы: ");
+    scanf("%d", &limit);
+
+    int sum;
+    int count;
+
+
+    sum = 0;
+    count = 0;
+
+    while (count < size && sum <= limit) {
+        sum += array[count];
+        count++;
+    }
+
+    printf("\n[Способ 1: while] Нужно сложить элементов: %d (Итоговая сумма: %d)\n", count, sum);
+
+
+    sum = 0;
+    count = 0;
+
+    if (size > 0&& sum < limit) {
+        do {
+            sum += array[count];
+            count++;
+        } while (count < size && sum <= limit);
+    }
+
+    printf("[Способ 2: do-while] Нужно сложить элементов: %d (Итоговая сумма: %d)\n", count, sum);
+
+
+    sum = 0;
+    count = 0;
+
+    for (count = 0; count < size && sum <= limit; count++) {
+        sum += array[count];
+    }
+
+    printf("[Способ 3: for] Нужно сложить элементов: %d (Итоговая сумма: %d)\n", count, sum);
+
+    return 0;
+}
 
