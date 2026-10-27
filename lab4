@@ -1,276 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
-#include <stdlib.h>
-#include <locale.h>
-
-#define MAX_SIZE 1000
-
-int main() {
-    setlocale(LC_ALL, "RUS");
-
-    int input_size;
-    int arr[MAX_SIZE];
-    int ts;
-    int cs = 0;
-    int c = 0;
-
-    printf("Введите размер массива (сколько чисел сгенерировать): ");
-    scanf("%d", &input_size);
-
-    const int SIZE = input_size;
-
-    printf("\nСгенерированный массив чисел:\n");
-    for (int i = 0; i < SIZE; i++) {
-        arr[i] = rand() % 50 + 1;
-        printf("%d ", arr[i]);
-    }
-    printf("\n\n");
-
-    printf("Введите заданное значение суммы: ");
-    scanf("%d", &ts);
-
-    for (int i = 0; i < SIZE && cs <= ts; i++) {
-        cs = cs + arr[i];
-        c++;
-    }
-
-    if (cs > ts) {
-        printf("\nНужно сложить элементов: %d\n", c);
-        printf("Полученная сумма: %d\n", cs);
-    }
-    else {
-        printf("\nДаже всех %d элементов не хватило, чтобы превысить %d\n", SIZE, #define _CRT_SECURE_NO_WARNINGS #include <locale.h> #include <stdio.h>
-int main() { setlocale(LC_ALL, "Russian"); double S; int valid = 0;
-// Цикл ввода без break, continue и getchar
-while (valid == 0) {
-    printf("Введите значение S (S > 1): ");
-    
-    if (scanf("%lf", &S) != 1) {
-        printf("Ошибка ввода. Пожалуйста, введите число.\n");
-        scanf("%*s"); // Очищаем неверный ввод (заменяет getchar)
-    } 
-    else {
-        if (S <= 1.0) {
-            printf("Ошибка ввода: значение S должно быть больше 1 (вы ввели %.2lf).\n", S);
-        } else {
-            valid = 1; // Устанавливаем флаг, чтобы выйти из цикла ввода
-        }
-    }
-}
-
-if (S >= 12.0) {
-    printf("Сумма этой последовательности никогда не превысит 12.\n");
-    printf("Для заданного S = %.2lf решения не существует.\n", S);
-    return 0;
-}
-
-double sum = 0.0;
-int n = 1;
-double power_of_two = 1.0;
-while (sum <= S) {
-    double term = (n * n) / power_of_two;
-    sum += term;
-    if (sum <= S) {
-        n++;
-        power_of_two *= 2.0;
-    }
-}
-printf("\n--- Цикл while ---\n");
-printf("Минимальное количество элементов: %d\n", n);
-printf("Достигнутая сумма: %lf\n", sum);
-
-sum = 0.0;
-n = 1;
-power_of_two = 1.0;
-do {
-    double term = (n * n) / power_of_two;
-    sum += term;
-    if (sum <= S) {
-        n++;
-        power_of_two *= 2.0;
-    }
-} while (sum <= S);
-printf("\n--- Цикл do-while ---\n");
-printf("Минимальное количество элементов: %d\n", n);
-printf("Достигнутая сумма: %lf\n", sum);
-
-sum = 0.0;
-n = 1;
-power_of_two = 1.0;
-for (; sum <= S; ) {
-    double term = (n * n) / power_of_two;
-    sum += term;
-    if (sum <= S) {
-        n++;
-        power_of_two *= 2.0;
-    }
-}
-printf("\n--- Цикл for ---\n");
-printf("Минимальное количество элементов: %d\n", n);
-printf("Достигнутая сумма: %lf\n", sum);
-
-return 0;
-}
-
-
-#define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
-#include <stdlib.h>
-#include <locale.h>
-
-int main() {
-    setlocale(LC_ALL, "RUS");
-
-    int input_size = 0;
-    int valid_size = 0;
-
-    while (valid_size == 0) {
-        printf("Введите размер массива: ");
-        if (scanf("%d", &input_size) != 1) {
-            printf("Ошибка ввода. Пожалуйста, введите целое число.\n");
-            scanf("%*s"); 
-        }
-        else {
-            
-            if (input_size <= 0 || input_size > 10000) {
-                printf("Ошибка: размер должен быть от 1 до 10000 (вы ввели %d).\n", input_size);
-            }
-            else {
-                valid_size = 1;
-            }
-        }
-    }
-
-    const int SIZE = input_size;
-
-    int arr[10000];
-
-    printf("\nСгенерированный массив чисел:\n");
-    for (int i = 0; i < SIZE; i++) {
-        arr[i] = rand() % 50 + 1;
-        printf("%d ", arr[i]);
-    }
-    printf("\n\n");
-
-    int target_sum = 0;
-    int valid_sum = 0;
-
-   
-    while (valid_sum == 0) {
-        printf("Введите заданное значение суммы (S > 0): ");
-        if (scanf("%d", &target_sum) != 1) {
-            printf("Ошибка ввода. Пожалуйста, введите целое число.\n");
-            scanf("%*s");
-        }
-        else {
-            if (target_sum <= 0) {
-                printf("Ошибка ввода: значение должно быть больше 0 (вы ввели %d).\n", target_sum);
-            }
-            else {
-                valid_sum = 1;
-            }
-        }
-    }
-
-    int sum = 0;
-    int count = 0;
-
-    // --- Вариант 1: Цикл while ---
-    sum = 0;
-    count = 0;
-    while (count < SIZE && sum <= target_sum) {
-        sum += arr[count];
-        count++;
-    }
-
-    printf("\n--- Цикл while ---\n");
-    if (sum > target_sum) {
-        printf("Минимальное количество элементов: %d\n", count);
-        printf("Достигнутая сумма: %d\n", sum);
-    }
-    else {
-        printf("Даже всех %d элементов не хватило, чтобы превысить %d. Максимальная сумма: %d\n", SIZE, target_sum, sum);
-    }
-
-    // --- Вариант 2: Цикл do-while ---
-    sum = 0;
-    count = 0;
-    do {
-        sum += arr[count];
-        count++;
-    } while (count < SIZE && sum <= target_sum);
-
-    printf("\n--- Цикл do-while ---\n");
-    if (sum > target_sum) {
-        printf("Минимальное количество элементов: %d\n", count);
-        printf("Достигнутая сумма: %d\n", sum);
-    }
-    else {
-        printf("Даже всех %d элементов не хватило, чтобы превысить %d.\n", SIZE, target_sum);
-    }
-
-    // --- Вариант 3: Цикл for ---
-    sum = 0;
-    count = 0;
-    for (; count < SIZE && sum <= target_sum; ) {
-        sum += arr[count];
-        count++;
-    }
-
-    printf("\n--- Цикл for ---\n");
-    if (sum > target_sum) {
-        printf("Минимальное количество элементов: %d\n", count);
-        printf("Достигнутая сумма: %d\n", sum);
-    }
-    else {
-        printf("Даже всех %d элементов не хватило, чтобы превысить %d.\n", SIZE, target_sum);
-    }
-
-    return 0;
-}
-#define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
-#include <locale.h>
-#include <stdlib.h>
-
-int main(){
-    setlocale(LC_ALL, "RUS");
-    int ms;
-    printf("Введите размер массива: ");
-    scanf("%d", &ms);
-    
-    const int s = ms;
-    int arr[s];
-    
-    int tg;
-    int cs = 0;
-    int c = 0;
-    
-    printf("Заполните массив из %d эл.:\n", s);
-    // ИСПРАВЛЕНО: убрана лишняя точка с запятой в конце строки
-    for (int i = 0; i < s; i++) { 
-        printf("Элемент [%d]: ", i);
-        scanf("%d", &arr[i]);
-    }
-    
-    printf("Введите значение суммы: ");
-    scanf("%d", &tg);
-    
-    while (c < s && cs <= tg) {
-        cs += arr[c];
-        c++;
-    }
-    
-    if (cs > tg) {
-        printf("Чтобы сумма превысила %d, нужно сложить %d элементов.\n", tg, c);
-        printf("Итоговая сумма: %d\n", cs);
-    }
-    else {
-        printf("Даже всех элементов %d не хватило, чтобы превысить сумму %d\n", s, tg);
-    }
-    
-    return 0;
-}
+12 задание
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <locale.h>
@@ -346,5 +74,74 @@ int main() {
     printf("[Способ 3: for] Нужно сложить элементов: %d (Итоговая сумма: %d)\n", count, sum);
 
     return 0;
+}
+24 зажание 
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <locale.h>
+int main() {
+	setlocale(LC_ALL, "RUS");
+	long long k;
+	long long temp;
+	long long product=1;
+	int hs=0;
+	printf("Введите целое положительно число до 10**9");
+	if (scanf("%lld", &k) != 1 || k <= 0) {
+		printf("ошибка ввода число должно быть положительным");
+		return 1;
+	}
+	temp = k;
+
+	while (temp > 0) {
+		int d = temp % 10;
+		if (d % 2 != 0) {
+			product *= d;
+			hs = 1;
+			
+		}
+		temp /= 10;
+
+	}
+	printf("Рeзyльтат");
+	if (hs == 1) {
+		printf("способ while %lld\n", product);
+	}
+	else {
+		printf("способ while нечетных цифр нет");
+	}
+	long long product2 = 1;
+	int hs2 = 0;
+	for (long long temp2 = k;temp2 > 0;temp2 /= 10) {
+		int d = temp2 % 10;
+		if (d % 2 != 0) {
+			product2 *= d;
+			hs2 = 1;
+		}
+	}
+	if (hs2 == 1) {
+		printf("Результат (Способ 2: for): %lld\n", product2);
+
+	}
+	else {
+		printf("Результат (Способ 2: for): Нечетных цифр нет\n");
+	}
+
+	long long temp3 = k;
+	long long product3 = 1;
+	int hs3 = 0;
+	do {
+		int d = temp3 % 10;
+		if (d % 2 != 0) {
+			product3 *= d;
+			hs3 = 1;
+		}
+		temp3 /= 10;
+	} while (temp3 > 0);
+	if (hs3 == 1) {
+		printf("Результат (Способ 3: do-while): %lld\n", product3);
+	}
+	else {
+		printf("Результат(Способ 3: do - while) : Нечетных цифр нет\n");
+	}
 }
 
