@@ -79,69 +79,89 @@ int main() {
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <locale.h>
+#include <stdbool.h>
+
 int main() {
-	setlocale(LC_ALL, "RUS");
-	long long k;
-	long long temp;
-	long long product=1;
-	int hs=0;
-	printf("Введите целое положительно число до 10**9");
-	if (scanf("%lld", &k) != 1 || k <= 0) {
-		printf("ошибка ввода число должно быть положительным");
-		return 1;
-	}
-	temp = k;
+    setlocale(LC_ALL, "RUS");
+    long long k = 0;
 
-	while (temp > 0) {
-		int d = temp % 10;
-		if (d % 2 != 0) {
-			product *= d;
-			hs = 1;
-			
-		}
-		temp /= 10;
+    while (k <= 0 || k > 1e9) {
+        printf("Введите целое положительное число до 10^9: ");
+        if (scanf("%lld", &k) == 1) {
+            if (k > 0 && k <= 1e9) {
+            }
+        }
+        else {
+            printf("Ошибка: число должно быть положительным и не больше 10^9.\nПопробуйте снова.\n\n");
+            while (getchar() != '\n');
+            k = 0;
+        }
+        if (k <= 0 || k > 1e9) {
+            printf("Ошибка: число должно быть положительным и не больше 10^9.\nПопробуйте снова.\n\n");
+        }
+    }
 
-	}
-	printf("Рeзyльтат");
-	if (hs == 1) {
-		printf("способ while %lld\n", product);
-	}
-	else {
-		printf("способ while нечетных цифр нет");
-	}
-	long long product2 = 1;
-	int hs2 = 0;
-	for (long long temp2 = k;temp2 > 0;temp2 /= 10) {
-		int d = temp2 % 10;
-		if (d % 2 != 0) {
-			product2 *= d;
-			hs2 = 1;
-		}
-	}
-	if (hs2 == 1) {
-		printf("Результат (Способ 2: for): %lld\n", product2);
+    long long temp = k;
+    long long product = 1;
+    bool hs = false;
 
-	}
-	else {
-		printf("Результат (Способ 2: for): Нечетных цифр нет\n");
-	}
+    while (temp > 0) {
+        int d = temp % 10;
+        if (d % 2 != 0) {
+            product *= d;
+            hs = true;
+        }
+        temp /= 10;
+    }
 
-	long long temp3 = k;
-	long long product3 = 1;
-	int hs3 = 0;
-	do {
-		int d = temp3 % 10;
-		if (d % 2 != 0) {
-			product3 *= d;
-			hs3 = 1;
-		}
-		temp3 /= 10;
-	} while (temp3 > 0);
-	if (hs3 == 1) {
-		printf("Результат (Способ 3: do-while): %lld\n", product3);
-	}
-	else {
-		printf("Результат(Способ 3: do - while) : Нечетных цифр нет\n");
-	}
+    printf("\nРезультат (Способ 1: while): ");
+    if (hs == true) {
+        printf("%lld\n", product);
+    }
+    else {
+        printf("нечетных цифр нет\n");
+    }
+
+    long long product2 = 1;
+    bool hs2 = false;
+
+    for (long long temp2 = k; temp2 > 0; temp2 /= 10) {
+        int d = temp2 % 10;
+        if (d % 2 != 0) {
+            product2 *= d;
+            hs2 = true;
+        }
+    }
+
+    printf("Результат (Способ 2: for): ");
+    if (hs2 == true) {
+        printf("%lld\n", product2);
+    }
+    else {
+        printf("нечетных цифр нет\n");
+    }
+
+    long long temp3 = k;
+    long long product3 = 1;
+    bool hs3 = false;
+
+    do {
+        int d = temp3 % 10;
+        if (d % 2 != 0) {
+            product3 *= d;
+            hs3 = true;
+        }
+        temp3 /= 10;
+    } while (temp3 > 0);
+
+    printf("Результат (Способ 3: do-while): ");
+    if (hs3 == true) {
+        printf("%lld\n", product3);
+    }
+    else {
+        printf("нечетных цифр нет\n");
+    }
+
+    return 0;
 }
 
