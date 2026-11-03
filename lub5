@@ -55,3 +55,51 @@ int main() {
 
     return 0;
 }
+24 #define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+int main() {
+	setlocale(LC_ALL, "RUS");
+	const int MIN = 1;
+	const int MAX = 5000;
+	int n;
+	int arr[5000];
+	do {
+		printf("Введите размер массива N (от %d до %d): ", MIN, MAX);
+		if (scanf("%d", &n) != 1) {
+			printf("Ошибка\n");
+			return 1;
+		}
+	} while (n < MIN || n > MAX);
+	printf("Исходный массив: ");
+	for (int i = 0; i < n; i++) {
+		arr[i] = 1 + rand() % 20;
+		if (n <= 100) {
+			printf("%d ", arr[i]);
+		}
+	}
+	if (n > 100) {
+		printf("[массив слишком большой для вывода]");
+	}
+	printf("\n\n");
+	int ml = 1;
+	int l = 1;
+	for (int i = 1; i < n; i++) {
+		if (arr[i] == arr[i - 1] + 1) {
+			l++;
+		}
+		else {
+			if (l > ml) {
+				ml = l;
+			}
+			l = 1;
+		}
+	}
+	if (l > ml) {
+		ml = l;
+	}
+	printf("Длина наибольшего участка возрастания: %d\n", ml);
+	return 0;
+}
