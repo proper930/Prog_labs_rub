@@ -1,0 +1,62 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+int main() {
+    setlocale(LC_ALL, "RUS");
+    const int MIN = 1;
+    const int MAX = 100;
+    int n, m;
+    int arr[MAX][MAX];
+
+    
+    do {
+        printf("Введите количество строк N (от %d до %d): ", MIN, MAX);
+        if (scanf("%d", &n) != 1) {
+            printf("Ошибка\n");
+            return 1;
+        }
+    } while (n < MIN || n > MAX);
+
+    
+    do {
+        printf("Введите количество столбцов M (от %d до %d): ", MIN, MAX);
+        if (scanf("%d", &m) != 1) {
+            printf("Ошибка\n");
+            return 1;
+        }
+    } while (m < MIN || m > MAX);
+
+    printf("\nИсходная матрица:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            arr[i][j] = 1 + rand() % 100;
+            printf("%d\t", arr[i][j]);
+        }
+        printf("\n"); 
+    }
+    printf("\n");
+
+    int mofm;
+
+    
+    for (int i = 0; i < n; i++) {
+        int mnr = arr[i][0]; 
+
+        for (int j = 1; j < m; j++) { 
+            if (arr[i][j] < mnr) {    
+                mnr = arr[i][j];
+            }
+        }
+
+        printf("Минимум в строке %d: %d\n", i + 1, mnr);
+
+        if (i == 0 || mnr > mofm) {
+            mofm = mnr;
+        }
+    }
+
+    printf("\nМаксимальный элемент среди минимальных: %d\n", mofm);
+    return 0;
+}
