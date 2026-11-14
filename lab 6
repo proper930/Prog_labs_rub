@@ -51,4 +51,83 @@ int main(){
 
 
 }
+24 задача 
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <locale.h>
+
+int main() {
+    setlocale(LC_ALL, "RUS");
+
+    const int MIN = 1;
+    const int MAX = 100;
+    const int EVENTS = 10; // В десятиборье всегда 10 видов
+    const int NAME_LEN = 50; // Максимальная длина фамилии
+
+    int n;
+    int scores[MAX][EVENTS];       // Двумерный массив для баллов (N на 10)
+    char surnames[MAX][NAME_LEN];  // Двумерный массив символов для фамилий
+    int total[MAX];                // Одномерный массив для суммы баллов
+
+    // 1. Ввод количества спортсменов с проверкой
+    do {
+        printf("Введите количество спортсменов N (от %d до %d): ", MIN, MAX);
+        if (scanf("%d", &n) != 1) {
+            printf("Ошибка ввода\n");
+            return 1;
+        }
+    } while (n < MIN || n > MAX);
+
+    // 2. Ввод фамилий и генерация баллов по 10 видам
+    printf("\nВведите фамилии спортсменов (без пробелов):\n");
+    for (int i = 0; i < n; i++) {
+        printf("Спортсмен %d: ", i + 1);
+        scanf("%49s", surnames[i]); // Читаем фамилию (не более 49 символов)
+
+        total[i] = 0; // Обнуляем сумму перед подсчётом
+        for (int j = 0; j < EVENTS; j++) {
+            scores[i][j] = 500 + rand() % 501; // Баллы за вид от 500 до 1000
+            total[i] += scores[i][j];          // Сразу прибавляем к общей сумме
+        }
+    }
+
+    // 3. Вывод исходной таблицы результатов
+    printf("\nИсходные результаты по 10 видам:\n");
+    for (int i = 0; i < n; i++) {
+        printf("%-15s | ", surnames[i]); // Выравнивание фамилии по левому краю
+        for (int j = 0; j < EVENTS; j++) {
+            printf("%4d ", scores[i][j]);
+        }
+        printf("| Сумма: %d\n", total[i]);
+    }
+
+    // 4. Сортировка пузырьком по убыванию суммы баллов
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (total[j] < total[j + 1]) {
+                // Меняем местами суммы баллов
+                int tempScore = total[j];
+                total[j] = total[j + 1];
+                total[j + 1] = tempScore;
+
+                // Синхронно меняем местами фамилии!
+                char tempName[NAME_LEN];
+                strcpy(tempName, surnames[j]);
+                strcpy(surnames[j], surnames[j + 1]);
+                strcpy(surnames[j + 1], tempName);
+            }
+        }
+    }
+
+    // 5. Вывод итоговой таблицы мест
+    printf("\nИтоговый протокол (в порядке занятых мест):\n");
+    for (int i = 0; i < n; i++) {
+        printf("%d место: %-15s — %d баллов\n", i + 1, surnames[i], total[i]);
+    }
+
+    return 0;
+}
+
 
